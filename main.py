@@ -8,6 +8,7 @@ app = Flask(__name__)
 def show_tables():
     rawData = pd.read_csv('lottery.txt', sep='\t')
     rawData.set_index(['round'],inplace = True)
+    rawData.sort_index(by='date')
 
     return rawData.to_html(classes='lottery_result')
 
