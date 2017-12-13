@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 from pandas import Series, DataFrame
-from flask import Flask
+from flask import Flask,render_template
 
 rawData = pd.read_csv('lottery.txt', sep='\t')
 rawData.set_index(['round'], inplace=True)
@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def show_tables():
-    return rawData.to_html()
+    return render_template('index.html')
 
 @app.route('/count')
 def count_frequency():
