@@ -7,10 +7,6 @@ rawData = pd.read_csv('lottery.csv', usecols=['round','date','first','second','t
 
 app = Flask(__name__)
 
-# @app.route('/')
-# def show_tables():
-#     return rawData.to_html()
-
 @app.route('/')
 def count_frequency():
     arr1 = pd.read_csv('lottery.csv', usecols=['first']).T.values.tolist()[0]
