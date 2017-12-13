@@ -1,16 +1,27 @@
 import pandas as pd
+import numpy as np
 from pandas import Series, DataFrame
 from flask import Flask
+
+rawData = pd.read_csv('lottery.txt', sep='\t')
+rawData.set_index(['round'], inplace=True)
 
 app = Flask(__name__)
 
 @app.route('/')
 def show_tables():
-    rawData = pd.read_csv('lottery.txt', sep='\t')
-    rawData.set_index(['round'],inplace = True)
-    rawData.sort_index(by='date')
+    return rawData.to_html()
 
-    return rawData.to_html(classes='lottery_result')
+@app.route('/count')
+def count_frequency():
+    arr = ['']
+    for ex in rawData:
+        print (ex)
+        arr.append(ex)
+    return arr
+
+
+
 
 if __name__ == '__main__':
     app.debug = True
